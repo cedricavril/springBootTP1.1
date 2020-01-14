@@ -2,6 +2,7 @@ package com.example.springboot;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,6 @@ public class SimpleController {
 	return "home";
 	}
 
-	
 	@GetMapping("/datepage")
 	public String datePage(Model model) {
 		int 	intMonth = LocalDateTime.now().getMonthValue(),
@@ -36,12 +36,21 @@ public class SimpleController {
 			summerTimeline = 21 * 6,
 			fallTimeline = 21 * 9,
 			winterTimeline = 21 * 12;
+		ArrayList<Saison> saisons = new ArrayList<Saison>();
 
 		if (currentAnnualTimeStamp >= springTimeline) season = "printemps";
 		else if (currentAnnualTimeStamp >= summerTimeline) season = "été";
 		else if (currentAnnualTimeStamp >= fallTimeline) season = "automne";
 		else if (currentAnnualTimeStamp >= winterTimeline) season = "hiver";
 
+		saisons.add(new Saison("printemps", season == "printemps"));
+		saisons.add(new Saison("été", season == "été"));
+		saisons.add(new Saison("automne", season == "automne"));
+		saisons.add(new Saison("hiver", season == "hiver"));
+
+		LOGGER.info(saisons.toString());
+		
+		model.addAttribute("saisons", saisons);
 		model.addAttribute("dateTitle", dateTitle);
 		model.addAttribute("localDateTime", LocalDateTime.now());
 		model.addAttribute("season", season);

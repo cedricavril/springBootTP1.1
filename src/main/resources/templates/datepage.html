@@ -7,6 +7,16 @@
 <body>
 	<p>Nous sommes le <span th:text="${localDateTime}">date du jour</span></p>
 	<p>Nous sommes donc <span th:text="${#temporals.dayOfWeekName(localDateTime)=='SAMEDI'||#temporals.dayOfWeekName(localDateTime)=='DIMANCHE'? 'En Week-End !' : 'Au boulot !'}"></span></p>
-	<span th:text="${season}">saison</span>
+	<p>Saison actuelle : <span th:text="${season}">saison</span><br>
+
+<tr th:each="saison: ${saisons}"> 
+	<span th:if="${saison.current == true}">
+		<b th:text="${saison.name}" />
+	</span>
+	<span th:unless="${saison.current == true}" >
+		<span th:text="${saison.name}" />
+	</span>
+</tr>	
+
 </body>
 </html>
