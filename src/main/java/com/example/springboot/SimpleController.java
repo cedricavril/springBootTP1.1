@@ -38,11 +38,11 @@ public class SimpleController {
 			winterTimeline = 21 * 12;
 		ArrayList<Saison> saisons = new ArrayList<Saison>();
 
-		if (currentAnnualTimeStamp >= springTimeline) season = "printemps";
-		else if (currentAnnualTimeStamp >= summerTimeline) season = "été";
+		if (currentAnnualTimeStamp >= winterTimeline) season = "hiver";
 		else if (currentAnnualTimeStamp >= fallTimeline) season = "automne";
-		else if (currentAnnualTimeStamp >= winterTimeline) season = "hiver";
-
+		else if (currentAnnualTimeStamp >= summerTimeline) season = "été";
+		else if (currentAnnualTimeStamp >= springTimeline) season = "printemps";
+		
 		saisons.add(new Saison("printemps", season == "printemps"));
 		saisons.add(new Saison("été", season == "été"));
 		saisons.add(new Saison("automne", season == "automne"));
